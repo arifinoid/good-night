@@ -1,0 +1,79 @@
+---
+openapi: 3.0.1
+info:
+  title: Good Night API
+  version: v1
+paths:
+  "/sleep_records":
+    post:
+      summary: Creates a sleep record
+      tags:
+      - SleepRecords
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                slept_at:
+                  type: string
+                  format: date_time
+                woke_up_at:
+                  type: string
+                  format: date_time
+              required:
+              - slept_at
+    get:
+      summary: Retrieves user sleep records
+      tags:
+      - SleepRecords
+      responses:
+        '200':
+          description: list of sleep records
+  "/users/{id}/follow":
+    post:
+      summary: Follow a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: followed successfully
+  "/users/{id}/unfollow":
+    delete:
+      summary: Unfollow a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: unfollowed successfully
+  "/users/{id}/followings/sleep_records":
+    get:
+      summary: Retrieve followings' sleep records sorted by duration
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: retrieved successfully
+definitions: {}
